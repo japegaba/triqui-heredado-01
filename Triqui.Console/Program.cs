@@ -30,19 +30,7 @@ while (seguir)
         Console.WriteLine();
 
         char jug = t % 2 == 0 ? 'X' : 'O';
-        Console.Write("Turno de " + jug + ". Elige una casilla (1-9): ");
-        int pos = int.Parse(Console.ReadLine());
-
-        if (pos < 1 || pos > 9)
-        {
-            Console.WriteLine("Casilla invalida");
-            continue;
-        }
-        if (b[pos - 1] != ' ')
-        {
-            Console.WriteLine("Esa casilla ya esta ocupada");
-            continue;
-        }
+        int pos = LeerCasillaValida(jug, b);
 
         b[pos - 1] = jug;
         t++;
@@ -68,7 +56,7 @@ while (seguir)
     }
 
     Console.Write("Otra partida? (s/n): ");
-    string r = Console.ReadLine();
+    string? r = Console.ReadLine();
     if (r != "s" && r != "S") seguir = false;
 }
 
@@ -99,4 +87,39 @@ void printBoard()
         if (f < 2) Console.WriteLine("---+---+---");
     }
     Console.WriteLine();
+}
+
+int LeerCasillaValida(char jug, char[] tablero)
+{
+    while (true)
+    {
+        Console.Write("Turno de " + jug + ". Elige una casilla (1-9): ");
+        string? entrada = Console.ReadLine();
+
+        if (string.IsNullOrWhiteSpace(entrada))
+        {
+            Console.WriteLine("La entrada está vacía. Introduce un número del 1 al 9.");
+            continue;
+        }
+
+        if (!int.TryParse(entrada, out int pos))
+        {
+            Console.WriteLine("La entrada no es válida. Debe ser un número del 1 al 9.");
+            continue;
+        }
+
+        if (pos < 1 || pos > 9)
+        {
+            Console.WriteLine("La casilla debe estar entre 1 y 9.");
+            continue;
+        }
+
+        if (tablero[pos - 1] != ' ')
+        {
+            Console.WriteLine("La casilla está ocupada. Elija otra.");
+            continue;
+        }
+
+        return pos;
+    }
 }

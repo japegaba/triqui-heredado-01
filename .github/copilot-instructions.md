@@ -66,3 +66,8 @@ Después de cada cambio que hagas en el proyecto, agrega una entrada al final de
 
 Para la fecha y la hora, ejecuta en la terminal: Get-Date -Format "yyyy-MM-dd HH:mm"
 No borres ni cambies entradas anteriores. Si no hiciste cambios, no agregues entrada.
+## Verificación
+
+- Cada etapa se verifica con dotnet build, sin errores, y con las partidas de prueba de pruebas/README.md.
+- No modifiques los archivos de la carpeta pruebas. Si una partida falla, se corrige el código, no la partida.
+- No cambies los mensajes que ve el jugador (por ejemplo «Gana X» o el marcador final) si la etapa no lo pide.

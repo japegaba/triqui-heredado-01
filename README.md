@@ -16,5 +16,11 @@ dotnet run
 
 - Juegan X y O por turnos.
 - Cada jugador escribe el número de la casilla (1 a 9) donde quiere jugar.
-- Gana quien complete tres en línea: horizontal, vertical o diagonal.
+dotnet builddotnet build- Gana quien complete tres en línea: horizontal, vertical o diagonal.
 - Al terminar, el juego pregunta si quieren otra partida y lleva el marcador.
+
+## Validación de entrada
+
+- La aplicación comprueba que la casilla no esté vacía ni sea no numérica.
+- Si el usuario introduce un valor decimal, fuera de rango o no válido, el sistema lo avisa en español y vuelve a pedir la casilla.
+- Las casillas ya ocupadas también se rechazan con un aviso claro para continuar la partida sin romper la ejecución.

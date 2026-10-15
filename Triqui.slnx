@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Triqui.Console/Triqui.Console.csproj" />
+  <Project Path="Triqui.Core/Triqui.Core.csproj" />
+</Solution>

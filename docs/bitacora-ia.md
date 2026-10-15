@@ -16,3 +16,17 @@ Registro de cada cambio hecho con ayuda de la IA: qué cambió, por qué, cómo 
 - Archivos: docs/plan.md
 - Verificación: revisión del documento para confirmar que cada etapa tiene objetivo, archivos, hallazgo del diagnóstico y forma de comprobación, y que la etapa 3.1 crea la solución con biblioteca y consola sin cambiar el comportamiento del juego.
 - Decisión del equipo: Aceptado
+
+## 2026-10-15 14:42 · Etapa 3.1 · Solución modular con dominio y consola
+- Cambio: se creó la solución .NET con los proyectos Triqui.Core y Triqui.Console; el contenido de Program.cs se movió al proyecto de consola sin alterar su lógica y la biblioteca quedó con modelos, validación y servicios mínimos alineados con la arquitectura elegida.
+- Motivo: la etapa 3.1 del plan exige separar el dominio de la interfaz manteniendo el comportamiento actual y preparar la base para la siguiente etapa de validación.
+- Archivos: Triqui.slnx, Triqui.Core/**, Triqui.Console/Program.cs, Triqui.Console/Triqui.Console.csproj
+- Verificación: compilación con dotnet build en la raíz del proyecto, que finalizó correctamente con 2 advertencias de nulabilidad heredadas del código original y sin cambiar el flujo del juego.
+- Decisión del equipo: Aceptado
+
+## 2026-10-15 17:01 · Etapa 3.2 · Validación segura de entradas
+- Cambio: se aisló la lectura y validación de la casilla en un helper de la consola para controlar entradas vacías, no numéricas, fuera de rango y casillas ocupadas antes de actualizar el tablero; además se documentó ese flujo en el README.
+- Motivo: el diagnóstico D-01 identifica la dependencia directa de int.Parse(Console.ReadLine()) sin protección, y la etapa 3.2 exige corregir ese punto sin avanzar a la validación de estado del juego ni a la lógica de victoria.
+- Archivos: Triqui.Console/Program.cs, README.md
+- Verificación: compilación con dotnet build desde la raíz del proyecto y comprobación del flujo de entrada para valores vacíos, no numéricos y fuera de rango, que ahora muestran mensajes en español y repiten la solicitud de casilla.
+- Decisión del equipo: Aceptado

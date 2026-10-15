@@ -1,0 +1,17 @@
+# Plan de migración hacia la arquitectura de la Opción 1
+
+Este plan parte de la arquitectura elegida en [docs/arquitectura.md](arquitectura.md) y prioriza una migración gradual con una regla clave: el juego debe seguir funcionando en cada etapa, aunque la separación en proyectos y responsabilidades todavía no esté completa.
+
+| Etapa | Objetivo | Archivos que toca | Hallazgos del diagnóstico que resuelve | Cómo se verifica |
+| --- | --- | --- | --- | --- |
+| 3.1 | Crear la solución .NET con un proyecto de biblioteca para la lógica del juego y un proyecto de consola, manteniendo el comportamiento actual sin cambios funcionales. La biblioteca se encargará de reglas, tablero y validación; la consola solo se limitará a presentar la partida y recoger la entrada. | Program.cs, Triqui.csproj, README.md, docs/diagnostico.md, docs/arquitectura.md | No resuelve un hallazgo concreto, pero prepara la base estructural para que la lógica y la interfaz queden separadas sin alterar el comportamiento actual. | Se revisa que la solución carga correctamente, que el flujo del juego sigue ejecutándose y que la consola sigue aceptando partidas normales sin cambios de UX. |
+| 3.2 | Aislar la validación de entrada e implementar un flujo de lectura segura para cada casilla. Se elimina la dependencia directa de `Console.ReadLine()` en la lógica principal y se introduce una validación explícita antes de procesar la jugada. | Program.cs, README.md, cualquier archivo de UI o validación que se cree para la entrada | D-01: la lectura de la casilla usa `int.Parse(Console.ReadLine())` sin validación ni manejo de excepciones. | Se comprueba que entradas vacías, no numéricas y decimales no cierran la aplicación; el usuario recibe un aviso en español y vuelve a pedir una casilla. |
+| 3.3 | Reubicar la validación de casilla y la comprobación de estado del juego para que se haga antes de actualizar el tablero. Se corrige la lógica para revisar rango, ocupación y fin de partida, sin ocultar errores en la capa de interfaz. | Program.cs, archivos de validación y servicios del dominio que se creen, README.md | D-04: la validación de casillas reconoce solo rango numérico y ocupación, pero no controla de forma robusta las entradas de consola. | Se valida que una casilla fuera de rango, ocupada o no permitida no cambia el tablero; además, se comprueba que el programa no falle con entradas no válidas y que devuelve el control al flujo principal. |
+| 3.4 | Documentar el flujo del juego, la lógica de victoria y los criterios de validación en la documentación del proyecto para que la estructura y el comportamiento queden explícitos. | README.md, docs/arquitectura.md, docs/diagnostico.md, docs/plan.md | D-05: el programa no documenta el flujo ni la lógica del juego y el archivo contiene comentarios insuficientes. | Se revisa que el README explique reglas del juego, flujo de partida, validaciones, límites del tablero y cómo ejecutar o depurar el proyecto; además, se confirma que no quedan comentarios genéricos ni notas de TODO en la lógica. |
+
+## Nota de ejecución
+
+Cada etapa está pensada para durar menos de 15 minutos y cumplir un objetivo acotado. La secuencia es intencional: primero se organiza la solución, luego se corrigen las fallas del flujo de entrada y validación, y finalmente se documenta el comportamiento para mantener una base estable y comprobable.
+
+## Decisión del equipo
+Aprobado por el equipo

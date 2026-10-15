@@ -30,3 +30,10 @@ Registro de cada cambio hecho con ayuda de la IA: qué cambió, por qué, cómo 
 - Archivos: Triqui.Console/Program.cs, README.md
 - Verificación: compilación con dotnet build desde la raíz del proyecto y comprobación del flujo de entrada para valores vacíos, no numéricos y fuera de rango, que ahora muestran mensajes en español y repiten la solicitud de casilla.
 - Decisión del equipo: Aceptado
+
+## 2026-10-15 17:38 · Etapa 3.3 · Detección de diagonal secundaria
+- Cambio: se añadió la comprobación de la diagonal 3-5-7 para finalizar la partida y anunciar al ganador en cuanto se completa; se documentó el defecto como D-06.
+- Motivo: el flujo de consola omitía la diagonal secundaria, por lo que no detectaba esa línea válida y seguía solicitando jugadas.
+- Archivos: Triqui.Console/Program.cs, docs/diagnostico.md, docs/bitacora-ia.md
+- Verificación: `dotnet build Triqui.slnx` terminó sin advertencias ni errores; se comprobó que la diagonal secundaria, una fila, una columna y la diagonal principal detienen la partida exactamente en la quinta jugada.
+- Decisión del equipo: pendiente

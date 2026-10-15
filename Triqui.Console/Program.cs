@@ -75,6 +75,7 @@ bool CheckWinner(char p)
     if (b[2] == p && b[5] == p && b[8] == p) return true;
     // diagonales
     if (b[0] == p && b[4] == p && b[8] == p) return true;
+    if (b[2] == p && b[4] == p && b[6] == p) return true;
     return false;
 }
 

@@ -37,3 +37,10 @@ Registro de cada cambio hecho con ayuda de la IA: qué cambió, por qué, cómo 
 - Archivos: Triqui.Console/Program.cs, docs/diagnostico.md, docs/bitacora-ia.md
 - Verificación: `dotnet build Triqui.slnx` terminó sin advertencias ni errores; se comprobó que la diagonal secundaria, una fila, una columna y la diagonal principal detienen la partida exactamente en la quinta jugada.
 - Decisión del equipo: pendiente
+
+## 2026-10-15 18:00 · Etapa 3.3 · Validación de jugadas antes de actualizar el tablero
+- Cambio: se conectó la consola con el tablero y los servicios del dominio; la validación ahora rechaza posiciones fuera de rango, ocupadas o de una partida finalizada antes de marcar la casilla. Se documentó el flujo de validación.
+- Motivo: la etapa 3.3 exige validar el estado completo de la partida junto con la posición antes de modificar el tablero.
+- Archivos: Triqui.Console/Program.cs, Triqui.Core/Services/PartidaService.cs, Triqui.Core/Validators/ValidadorJugada.cs, Triqui.Core/Validators/EstadoValidacionJugada.cs, README.md, docs/bitacora-ia.md
+- Verificación: `dotnet build` terminó con 0 advertencias y 0 errores; las partidas de `pruebas/entrada-invalida.txt` y `pruebas/dos-partidas.txt` comprobaron entradas inválidas, casilla ocupada, empate y partidas consecutivas; una partida manual confirmó que la diagonal secundaria termina exactamente en la quinta jugada. `pruebas/x-gana-diagonal-357.txt` también se ejecutó.
+- Decisión del equipo: pendiente

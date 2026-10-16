@@ -140,3 +140,19 @@ Cuando el juego empiece a evolucionar hacia IA, multijugador o más modalidades,
 
 ## Decisión del equipo
 Opción 1
+
+## Arquitectura implementada
+
+La solución actual sigue la Opción 1 y contiene dos proyectos:
+
+- `Triqui.Core` concentra el tablero (`Models/Tablero`), el resultado (`Models/ResultadoPartida`), la validación (`Validators/ValidadorJugada` y `EstadoValidacionJugada`) y los servicios de partida y victoria (`Services/PartidaService` y `EvaluadorVictoria`).
+- `Triqui.Console` contiene el punto de entrada y la interacción con la terminal en `Program.cs`: presenta el tablero y el marcador, recoge la posición, comunica errores, cambia de jugador y pregunta si se desea iniciar otra partida.
+- `Triqui.Console` referencia `Triqui.Core`. El dominio no depende de la consola.
+
+### Flujo y reglas vigentes
+
+Cada partida reinicia el tablero y empieza con X. La consola alterna X y O, presenta las casillas numeradas del 1 al 9 y pide una jugada. La entrada se convierte con `int.TryParse`; después `PartidaService.ValidarJugada` verifica el estado de la partida y delega el rango y la disponibilidad de la casilla en `ValidadorJugada`. Solo una jugada válida llega a `Tablero.Marcar`.
+
+Después de marcar, `PartidaService.EvaluarEstado` busca una línea ganadora para X y O en las tres filas, las tres columnas y las diagonales 1-5-9 y 3-5-7. Si no hay ganador, declara empate cuando todas las casillas están ocupadas. El flujo de consola actualiza el marcador y termina la partida en cualquiera de esos dos casos.
+
+Las interfaces y proyectos adicionales descritos en la Opción 1 son una propuesta de evolución; no forman parte de la implementación actual.

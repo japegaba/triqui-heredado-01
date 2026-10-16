@@ -44,3 +44,10 @@ Registro de cada cambio hecho con ayuda de la IA: qué cambió, por qué, cómo 
 - Archivos: Triqui.Console/Program.cs, Triqui.Core/Services/PartidaService.cs, Triqui.Core/Validators/ValidadorJugada.cs, Triqui.Core/Validators/EstadoValidacionJugada.cs, README.md, docs/bitacora-ia.md
 - Verificación: `dotnet build` terminó con 0 advertencias y 0 errores; las partidas de `pruebas/entrada-invalida.txt` y `pruebas/dos-partidas.txt` comprobaron entradas inválidas, casilla ocupada, empate y partidas consecutivas; una partida manual confirmó que la diagonal secundaria termina exactamente en la quinta jugada. `pruebas/x-gana-diagonal-357.txt` también se ejecutó.
 - Decisión del equipo: pendiente
+
+## 2026-10-16 16:30 · Etapa 3.4 · Documentación del flujo y las reglas
+- Cambio: se documentaron las reglas, el flujo de partida, las validaciones, los límites del tablero y los comandos de compilación y ejecución; se describió la arquitectura implementada y se actualizaron los hallazgos con su resolución.
+- Motivo: la etapa 3.4 aborda D-05 y requiere dejar explícitos el comportamiento y los criterios de validación del juego.
+- Archivos: README.md, docs/arquitectura.md, docs/diagnostico.md, docs/plan.md, docs/bitacora-ia.md
+- Verificación: `dotnet build` terminó correctamente con 0 advertencias y 0 errores; las partidas de `pruebas/entrada-invalida.txt`, `pruebas/dos-partidas.txt` y `pruebas/x-gana-diagonal-357.txt` confirmaron las validaciones, los resultados de partida y la victoria diagonal. `git diff --check` no reportó errores; la documentación se contrastó con el flujo actual y no se encontraron notas genéricas ni TODO en el código de lógica.
+- Decisión del equipo: pendiente
